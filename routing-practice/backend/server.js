@@ -19,7 +19,7 @@ app.use('/api', require('../routes/meeting-list-route'));
 
 const server = app.listen(3000, () => console.log(`server running on port 3000`));
 
-process.on("unhandledRejecti on",(err,promise)=>
+process.on("unhandledRejection",(err,promise)=>
 { 
     console.log(`Logged Error ${err}`);
     server.close(() =>

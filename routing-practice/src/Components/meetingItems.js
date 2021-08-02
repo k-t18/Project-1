@@ -31,49 +31,15 @@ const MeetItem = () =>
         },1000)
 
     },[]);
-    // axios.get('/api/meetings-list-get').then(res =>
-    //     {
-    //         setmeetitem({meetitem : res.data});
-    //         console.log(meetitem);
-    //     })
-    //     .catch(err=>
-    //         {
-    //             console.log(err);
-    //         })
-
-    // useEffect( ()=>
-    // {
-    //     axios.get('/api/meetings-list-get').then(res =>
-    //             {
-    //                 setmeetitem({meetitem : res.data});
-    //                 console.log(meetitem);
-    //             })
-    //             .catch(err=>
-    //                 {
-    //                     console.log(err);
-    //                 })
-    // },[meetitem])
     
     return(
         <>
-            {/* <p>{meetitem.items[0].Hostname}</p> */}
-
-            {/* <div>
-                {meetitem.items.map( (item) =>
+            <div>
+                {meetitem.items[0].map((item) =>
                 {
-                    <p id={item._id}>{item.Hostname}</p>
+                    <p>{item.Hostname}</p>
                 })}
-            </div> */}
-            {/* <p>{meetitem.items.map((item) =>
-            
-                <p> {item.Hostname}</p>
-            )}</p> */}
-            {/* <div>
-                {meetitem.items.forEach(item=>
-                    {
-                        <p>{item}</p>
-                    })}
-            </div> */}
+            </div>
         </>
     )
 }
