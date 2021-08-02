@@ -1,0 +1,33 @@
+require('dotenv').config();
+// const abc = require("./.env")
+// dotenv.config({path:"./.env"});
+// dotenv.config({path:"D:\React-Routing\routing-practice\.env"});
+// const cors = require('cors');
+
+let PORT = process.env.PORT;
+
+const express = require('express');
+const app = express();
+const connectDB = require('../database/db');
+
+connectDB();
+
+// const cors = require('cors');
+app.use(express.json());
+app.use('/api/auth', require('../routes/routing-auth'));
+app.use('/api', require('../routes/meeting-list-route'));
+
+// app.use(cors());
+
+const server = app.listen(3000, () => console.log(`server running on port 3000`));
+
+process.on("unhandledRejecti on",(err,promise)=>
+{ 
+    console.log(`Logged Error ${err}`);
+    server.close(() =>
+    {
+        process.exit(1);
+    });
+});
+
+
