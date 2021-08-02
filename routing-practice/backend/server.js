@@ -1,7 +1,5 @@
 require('dotenv').config();
-// const abc = require("./.env")
-// dotenv.config({path:"./.env"});
-// dotenv.config({path:"D:\React-Routing\routing-practice\.env"});
+
 // const cors = require('cors');
 
 let PORT = process.env.PORT;
