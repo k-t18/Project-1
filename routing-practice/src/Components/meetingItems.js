@@ -64,10 +64,10 @@ const MeetItem = () =>
                     <p id={item._id}>{item.Hostname}</p>
                 })}
             </div> */}
-            <p>{meetitem.items.map((item) =>
+            {/* <p>{meetitem.items.map((item) =>
             
                 <p> {item.Hostname}</p>
-            )}</p>
+            )}</p> */}
             {/* <div>
                 {meetitem.items.forEach(item=>
                     {
