@@ -23,29 +23,9 @@ const MeetItem = () =>
         setTimeout(() =>
         {
             axios.get('/api/meetings-list-get').then(response =>{
-                // console.log(response.data);
-                // setmeetitem({meetitem:response.data})
-                
-                // setmeetitem(meet=[{meets:[{meetitem:response.data}]}]);
-                // console.log(meet[0].meets[0].meetitem);
-                // setmeetitem(meetitem=[{meets:[response.data]}]);
-                // setmeetitem(() =>
-                // {
-                //     meetitem=[{meets:[response.data]}]);
-                // })
-                // setmeetitem(meetitem.items=response.data);
                 setmeetitem({items:[...response.data]})
-
-                // setmeetitem({items:response.data})
-
+               // setmeetitem({items:response.data})
                 console.log(meetitem);
-
-                // setmeetitem({meetitem:response.data});
-                // const map1 = meetitem.items.map( (item) =>
-                //     item._id
-                // );
-                // console.log(map1);
-
             })
             .catch(err =>{
                 console.log(err);  
@@ -53,22 +33,30 @@ const MeetItem = () =>
         },1000)
 
     },[]);
-
-    // console.log(meetitem.items);
     
     return(
         <>
            <div>
 
                {meetitem.items.length ? meetitem.items.map( (item) =>
-               <p>{item._id}</p>) :"loading"}
+               <div key={item._id} class="row" >
+                   <div class="col-md-8">
+                        <p>{item.Hostname}</p>
+                        <p>{item.Book}</p>
+                        <p>{item.Genre}</p>
+                        <p>{item.MeetLink}</p>
+                    </div> 
+                    
+               </div>
+               ) :"loading"}
            </div>
 
-            <div>
+            {/* <div>
                 {JSON.stringify(meetitem)}
-            </div>
+            </div> */}
 
             {/* <p>hi</p> */}
+            {/* style={{marginTop:"2em",border:"1px solid green"}} */}
 
 
 

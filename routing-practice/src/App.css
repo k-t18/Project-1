@@ -88,6 +88,12 @@ section
   {
     display: none;
   }
+  .custom-list-group
+  {
+    margin-top: 2em;
+    width:100vw;
+    border:2px solid red;
+  }
 }
 
 @media screen and (min-width:768px) 
@@ -113,5 +119,15 @@ section
 
   .custom-input{
     outline: none;
+  }
+  .custom-list-group
+  {
+    margin-top:2em;
+    margin-left: 1.85em;
+    width:25vw;
+    height: 100vh;
+    border:2px solid red;
+    /* float:left; */
+    /* position: fixed; */
   }
 }
