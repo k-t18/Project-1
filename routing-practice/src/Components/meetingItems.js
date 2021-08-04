@@ -6,6 +6,18 @@ const MeetItem = () =>
     // const[meetitem,setmeetitem] = useState([items:{}]);
 
     const[meetitem,setmeetitem] =useState({items:[]});
+
+    // const arr =[1,2,3]
+    // const arr2=[...arr]
+
+    // axios.get('/api/meetings-list-get').then(response =>{
+    //     setmeetitem(meetitem.items=response.data);
+    //     console.log(meetitem.items[0]);
+    // }).catch(err => console.log(err));
+
+    // meetitem.items=[1,2,3,Math.random()];
+    // console.log(meetitem.items);
+
     useEffect( ()=>
     {
         setTimeout(() =>
@@ -21,8 +33,18 @@ const MeetItem = () =>
                 // {
                 //     meetitem=[{meets:[response.data]}]);
                 // })
-                setmeetitem(meetitem.items=response.data);
-                console.log(meetitem.items[0]);
+                // setmeetitem(meetitem.items=response.data);
+                setmeetitem({items:[...response.data]})
+
+                // setmeetitem({items:response.data})
+
+                console.log(meetitem);
+
+                // setmeetitem({meetitem:response.data});
+                // const map1 = meetitem.items.map( (item) =>
+                //     item._id
+                // );
+                // console.log(map1);
 
             })
             .catch(err =>{
@@ -31,15 +53,25 @@ const MeetItem = () =>
         },1000)
 
     },[]);
+
+    // console.log(meetitem.items);
     
     return(
         <>
+           <div>
+
+               {meetitem.items.length ? meetitem.items.map( (item) =>
+               <p>{item._id}</p>) :"loading"}
+           </div>
+
             <div>
-                {meetitem.items[0].map((item) =>
-                {
-                    <p>{item.Hostname}</p>
-                })}
+                {JSON.stringify(meetitem)}
             </div>
+
+            {/* <p>hi</p> */}
+
+
+
         </>
     )
 }

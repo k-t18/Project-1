@@ -1,6 +1,6 @@
-import e from 'cors';
-import React,{useState} from 'react'
 
+import React,{useState} from 'react';
+import axios from 'axios';
 import '../App.css';
 
 const Modal = () =>
@@ -12,16 +12,23 @@ const Modal = () =>
     const[date,setdate] = useState('');
     const[meetlink,setmeetlink] = useState('');
 
-    const modalSubmit = (e) =>
+    const modalSubmit = async (e) =>
     {
         e.preventDefault();
+        const config ={
+            header:{
+                "Content-Type":"application/json"
+            }, 
+        };
         setbookname('');
         setgenre('');
         setdate('');
         setmeetlink('');
 
-        // const {hostname,bookname,genre} = details;
-        console.log([bookname,genre,date,meetlink]);
+        await axios.post("/api/meetings-list",{Book:bookname,Genre:genre,Date:date,MeetLink:meetlink},config)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        // console.log([bookname,genre,date,meetlink]);
     }
 
     return(
