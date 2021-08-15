@@ -1,27 +1,25 @@
-require("dotenv").config({path:"./config.env"});
+require("dotenv").config({ path: "./config.env" });
 const User = require('../models/user');
 
-exports.register = async(req,res,next) =>
-{
-    const {username, email, password}=req.body;
+exports.register = async (req, res, next) => {
+    const { username, email, password } = req.body;
 
-    try{
+    try {
         const user = await User.create({
-            username,email,password
+            username, email, password
         });
         // res.status(201).json({
         //     success:true,
         //     token:"tokenforRegister"
         // })
 
-        sendToken(user,201,res);
+        sendToken(user, 201, res);
         return;
     }
-    catch(error)
-    {
+    catch (error) {
         res.status(500).json({
-            success:true,
-            error:error.message
+            success: true,
+            error: error.message
         })
         return;
     }
@@ -29,29 +27,25 @@ exports.register = async(req,res,next) =>
     return;
 };
 
-exports.login = async(req,res,next) =>
-{
-    const {email,password}=req.body;
+exports.login = async (req, res, next) => {
+    const { email, password } = req.body;
 
-    if(!email || !password)
-    {
-        res.status(400).json({success:false,error:"Please provide email and password"});
+    if (!email || !password) {
+        res.status(400).json({ success: false, error: "Please provide email and password" });
         return;
     }
 
-    try{
-        const user = await User.findOne({email}).select("+password");
+    try {
+        const user = await User.findOne({ email }).select("+password");
 
-        if(!user)
-        {
-            res.status(404).json({success:false,error:"user not found"});
+        if (!user) {
+            res.status(404).json({ success: false, error: "user not found" });
             return;
         }
         const isMatch = await user.matchPasswords(password);
 
-        if(!isMatch)
-        {
-            res.status(404).json({success: false,error:"Invalid credentials"});
+        if (!isMatch) {
+            res.status(404).json({ success: false, error: "Invalid credentials" });
             return;
         }
 
@@ -59,14 +53,21 @@ exports.login = async(req,res,next) =>
         //     success:true,
         //     token:"8667676",
         // });
-        sendToken(user,200,res);
+
+        req.session.user = user._id;
+        req.session.save(() => {
+
+        })
+
+        console.log(req.session);
+        console.log(req.session.user);
+        sendToken(user, 200, res);
         return;
     }
-    catch(error)
-    {
+    catch (error) {
         res.status(500).json({
-            success:false,
-            error:error.message
+            success: false,
+            error: error.message
         });
         return;
     }
@@ -74,18 +75,16 @@ exports.login = async(req,res,next) =>
     return;
 };
 
-exports.forgotpasssword = (req,res,next) =>
-{
+exports.forgotpasssword = (req, res, next) => {
     res.send("forgot password");
 };
 
-exports.resetpassword = (req,res,next) =>
-{
+exports.resetpassword = (req, res, next) => {
     res.send("reset password");
 };
 
-const sendToken = (user,statusCode,res)=>
-{
-    const token= user.getSignedToken();
-    res.status(statusCode).json({success:true,token});
+const sendToken = (user, statusCode, res) => {
+
+    const token = user.getSignedToken();
+    res.status(statusCode).json({ success: true, user, token });
 }

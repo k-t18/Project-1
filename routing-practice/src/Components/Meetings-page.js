@@ -5,17 +5,15 @@ import Modal from './modal-hostMeeting';
 import MeetItem from './meetingItems';
 import SideList from './side-list-item';
 
-const Meetings = () =>
-{
-    
+const Meetings = () => {
+
     const history = useHistory();
-    if(!localStorage.getItem("authToken"))
-    {
+    if (!localStorage.getItem("authToken")) {
         history.push('/');
     }
 
-    
-    return(
+
+    return (
         <>
             <div class="container mt-3 border w-50">
                 <div class="row">
@@ -41,20 +39,14 @@ const Meetings = () =>
                 </div>
             </div>
 
-            <SideList />
-            {/* <div class="container custom-list-group"> */}
-                {/* <div class="row mt-5 custom-list-group ">
-                    <div class=" col-md-4 col-lg-2 list-group">
-                        <button type="button" class="btn btn-primary text-center  list-group-item list-group-item-action" >First Genre</button>
-                        <button type="button" class="btn btn-primary text-center  list-group-item list-group-item-action" >Second Genre</button>
-                        <button type="button" class="btn btn-primary text-center  list-group-item list-group-item-action" >Third Genre</button>
-                        <button type="button" class="btn btn-primary text-center list-group-item list-group-item-action" >Fourth Genre</button>              
-                    </div>
-                </div> */}
-           
-            {/* </div> */}
+            <div class="row">
+                <SideList />
+                <div class="col-md-8">
+                    <MeetItem />
+                </div>
+            </div>
 
-            <MeetItem />
+
         </>
 
     )
